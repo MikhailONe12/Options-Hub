@@ -19,6 +19,7 @@
     <!-- Styles (Synchronous to prevent FOUC) -->
     <link rel="stylesheet" href="./src/core/coreStyles.css">
     <link rel="stylesheet" href="./src/core/blockStyles.css">
+    <link rel="stylesheet" href="./src/components/header/header.css">
     <link rel="stylesheet" href="./src/components/sidebar/sidebar.css">
     <link rel="stylesheet" href="./src/components/matrix/matrix.css">
 </head>
@@ -45,8 +46,19 @@
     <div id="header-container"></div>
 
     <!-- Navigation Helpers (Managed by headerRenderer) -->
-    <div id="exchange-tabs-container" class="exchange-tabs-container"></div>
-    <div id="ru-tabs-container" class="exchange-tabs-container"></div>
+    <!-- Exchange Mini-Tabs for Crypto -->
+    <div id="exchange-tabs-container" class="exchange-tabs-container">
+        <button class="exchange-tab active" data-exchange="bybit">Bybit</button>
+        <button class="exchange-tab" data-exchange="okx">OKX</button>
+        <button class="exchange-tab" data-exchange="bingx">BingX</button>
+    </div>
+
+    <!-- RU Market Sub-tabs -->
+    <div id="ru-tabs-container" class="exchange-tabs-container">
+        <button class="exchange-tab active" data-ru-subtab="futures">FUTURES</button>
+        <button class="exchange-tab" data-ru-subtab="indices">INDICES</button>
+        <button class="exchange-tab" data-ru-subtab="stocks">STOCKS</button>
+    </div>
 
     <!-- Ticker Sidebar (Managed by sidebarRenderer) -->
     <div id="ticker-sidebar-container"></div>
