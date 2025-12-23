@@ -1,0 +1,99 @@
+import { getBlock } from './blockRegistry.js';
+
+function resolveData(pageConfig, item, extSource){
+  // page-level dataSource overrides global, item may specify ticker
+  const ticker = item.ticker || item.props?.ticker || pageConfig.tickers[0];
+  const pageDs = pageConfig.dataSource || null;
+  let snapshot = pageDs ? pageDs(ticker, pageConfig, item) : (extSource ? extSource(ticker) : (window.data ? window.data[ticker] : {}));
+  
+  // Ensure all necessary properties are included in the snapshot
+  if (window.data && window.data[ticker]) {
+    // Create a new object to avoid mutating the original
+    snapshot = { ...snapshot };
+    // Include all properties from window.data[ticker] that start with 'sum_' or are in our whitelist
+    const importantProps = [
+      'sum_Delta_OI', 'sum_Gamma_OI', 'sum_Vega_OI', 'sum_Theta_OI', 
+      'sum_Vanna_OI', 'sum_Volga_OI', 'sum_Charm_OI', 'sum_Veta_OI', 
+      'sum_Speed_OI', 'sum_Zomma_OI', 'sum_Color_OI', 'sum_Ultima_OI', 
+      'total_rho',
+      // Enhanced volatility metrics for priceComparison block
+      'Sell_Score', 'Buy_Score', 'implied_volatility', 'historical_volatility', 
+      'realized_volatility', 'Gap', 'IV_pct', 'HV_pct', 'RV_pct'
+    ];
+    importantProps.forEach(prop => {
+      if (window.data[ticker][prop] !== undefined) {
+        snapshot[prop] = window.data[ticker][prop];
+      }
+    });
+  }
+  
+  // Debug IVR value
+  console.log('[resolveData] ticker:', ticker, 'ivr in snapshot:', snapshot?.ivr, 'ivr in window.data:', window.data?.[ticker]?.ivr);
+  
+  try {
+    if (item.block === 'priceComparison') {
+      const sh = Array.isArray(snapshot.spotHistory) ? snapshot.spotHistory.length : 0;
+      const ph = Array.isArray(snapshot.priceHistory) ? snapshot.priceHistory.length : 0;
+      const fh = Array.isArray(snapshot.futuresHistory) ? snapshot.futuresHistory.length : 0;
+      // Minimal debug to help diagnose empty charts
+      console.debug(`[${item.block}] ticker=${ticker} spotHistory=${sh} priceHistory=${ph} futuresHistory=${fh}`);
+    }
+  } catch(_) {}
+  return { snapshot, ticker };
+}
+
+export async function loadPage(pageConfig, root, extSource){
+  root.innerHTML = '';
+  // apply grid container if grid defined
+  if(pageConfig.grid){
+    root.classList.add('page-grid');
+    const cols = pageConfig.grid.columns || 12;
+    const rowHeight = pageConfig.grid.rowHeight || 300;
+    root.style.setProperty('--page-grid-columns', cols);
+    root.style.setProperty('--page-grid-row-height', rowHeight+'px');
+  } else {
+    root.classList.remove('page-grid');
+    root.style.removeProperty('--page-grid-columns');
+    root.style.removeProperty('--page-grid-row-height');
+  }
+  pageConfig.layout.forEach(item => {
+    const def = getBlock(item.block);
+    if(!def) {
+      console.error('[pageLoader] Block not found:', item.block);
+      return;
+    }
+    console.log('[pageLoader] Mounting block:', item.block, 'for page:', pageConfig.id);
+    console.log('[pageLoader] Block def:', def, 'has mount:', typeof def.mount);
+    const container = document.createElement('div');
+    container.className = 'mod-block-container';
+    // Grid positioning
+    if(pageConfig.grid){
+      const col = item.col || 1;
+      const colSpan = item.colSpan || 1;
+      const row = item.row || 1;
+      const rowSpan = item.rowSpan || 1;
+      container.style.gridColumn = col + ' / span ' + colSpan;
+      container.style.gridRow = row + ' / span ' + rowSpan;
+    }
+    root.appendChild(container);
+    const { snapshot, ticker } = resolveData(pageConfig, item, extSource);
+    console.log('[pageLoader] Calling mount for', item.block, 'with pageId:', pageConfig.id);
+    if (typeof def.mount === 'function') {
+      def.mount(container, { props: item.props || {}, data: snapshot, ticker, pageId: pageConfig.id });
+    } else {
+      console.error('[pageLoader] mount is not a function for block:', item.block, typeof def.mount);
+    }
+  });
+}
+
+export function updatePage(pageConfig, root, extSource){
+  const items = pageConfig.layout;
+  const blocks = Array.from(root.querySelectorAll('.mod-block-container'));
+  blocks.forEach((container, idx) => {
+    const item = items[idx];
+    const def = getBlock(item.block);
+    if(!def || !def.update) return;
+    const { snapshot, ticker } = resolveData(pageConfig, item, extSource);
+    def.update(container, { props: item.props || {}, data: snapshot, ticker, pageId: pageConfig.id });
+  });
+}

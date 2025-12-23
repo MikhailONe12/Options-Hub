@@ -1,0 +1,287 @@
+/* Matrix Component Styles */
+
+.matrix-container {
+    display: flex;
+    gap: 16px;
+    height: 100%;
+    min-height: 500px;
+    padding: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+}
+
+/* Sidebar Strikes */
+.matrix-left-sidebar {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 40px;
+    /* Offset for header */
+}
+
+.strike-label {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    border-right: 1px solid var(--border);
+}
+
+.strike-label.active {
+    color: var(--neon-blue);
+    font-weight: 700;
+}
+
+/* Main Heatmap Section */
+.matrix-main-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.matrix-filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+.matrix-mode-selector {
+    display: flex;
+    gap: 4px;
+}
+
+.mode-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 4px 12px;
+    font-size: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.mode-btn.active {
+    border-color: var(--neon-blue);
+    color: var(--text-primary);
+    background: rgba(0, 128, 255, 0.1);
+}
+
+.matrix-grid-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.matrix-grid-header {
+    display: grid;
+    gap: 8px;
+    height: 40px;
+}
+
+.expiry-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+}
+
+.matrix-grid {
+    display: grid;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+/* Matrix Dot */
+.matrix-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background: rgba(128, 128, 128, 0.05);
+    transition: all 0.2s ease;
+    cursor: crosshair;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.matrix-dot:hover {
+    transform: scale(1.2);
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* GEX Heatmap Levels (Green) */
+.matrix-dot[data-gex-level="1"] {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.matrix-dot[data-gex-level="2"] {
+    background: rgba(0, 255, 65, 0.2);
+}
+
+.matrix-dot[data-gex-level="3"] {
+    background: rgba(0, 255, 65, 0.3);
+}
+
+.matrix-dot[data-gex-level="4"] {
+    background: rgba(0, 255, 65, 0.4);
+}
+
+.matrix-dot[data-gex-level="5"] {
+    background: rgba(0, 255, 65, 0.5);
+}
+
+.matrix-dot[data-gex-level="6"] {
+    background: rgba(0, 255, 65, 0.6);
+}
+
+.matrix-dot[data-gex-level="7"] {
+    background: rgba(0, 255, 65, 0.7);
+}
+
+.matrix-dot[data-gex-level="8"] {
+    background: rgba(0, 255, 65, 0.8);
+}
+
+.matrix-dot[data-gex-level="9"] {
+    background: rgba(0, 255, 65, 0.9);
+}
+
+.matrix-dot[data-gex-level="10"] {
+    background: rgba(0, 255, 65, 1.0);
+    box-shadow: 0 0 8px var(--neon-green);
+}
+
+/* DEX Heatmap Levels (Red/Purple) */
+.matrix-dot[data-dex-level="1"] {
+    background: rgba(255, 0, 64, 0.1);
+}
+
+.matrix-dot[data-dex-level="2"] {
+    background: rgba(255, 0, 64, 0.2);
+}
+
+.matrix-dot[data-dex-level="3"] {
+    background: rgba(255, 0, 64, 0.3);
+}
+
+.matrix-dot[data-dex-level="4"] {
+    background: rgba(255, 0, 64, 0.4);
+}
+
+.matrix-dot[data-dex-level="5"] {
+    background: rgba(255, 0, 64, 0.5);
+}
+
+.matrix-dot[data-dex-level="6"] {
+    background: rgba(255, 0, 64, 0.6);
+}
+
+.matrix-dot[data-dex-level="7"] {
+    background: rgba(255, 0, 64, 0.7);
+}
+
+.matrix-dot[data-dex-level="8"] {
+    background: rgba(255, 0, 64, 0.8);
+}
+
+.matrix-dot[data-dex-level="9"] {
+    background: rgba(255, 0, 64, 0.9);
+}
+
+.matrix-dot[data-dex-level="10"] {
+    background: rgba(255, 0, 64, 1.0);
+    box-shadow: 0 0 8px var(--neon-red);
+}
+
+/* Mixed Heatmap (Dual visual) - Simplified for now by letting background-color overlap or using radial gradients if we want to be fancy */
+/* For now, the latest applied attribute wins or we can add a dual-visual overlay */
+
+/* Zero Gamma Marker */
+.matrix-dot.zero-gamma-marker::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--neon-blue);
+    box-shadow: 0 0 5px var(--neon-blue);
+}
+
+/* Stats Column Styles */
+.matrix-stats-column {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-left: 1px solid var(--border);
+    padding-left: 16px;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stats-header h3 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.ticker-badge {
+    background: var(--neon-blue);
+    color: white;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.stats-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+}
+
+.stat-item.highlight {
+    border-color: var(--neon-blue);
+}
+
+.stat-item label {
+    color: var(--text-secondary);
+}
+
+.stat-item .value {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.stat-item .value.positive {
+    color: var(--neon-green);
+}
+
+.stat-item .value.negative {
+    color: var(--neon-red);
+}

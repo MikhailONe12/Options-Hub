@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Hub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Block Styles -->
+    <link rel="stylesheet" href="./src/blocks/greeks/styles.css">
+    <link rel="stylesheet" href="./src/blocks/maxPain/styles.css">
+    <link rel="stylesheet" href="./src/blocks/metric/styles.css">
+
+    <!-- Styles (Synchronous to prevent FOUC) -->
+    <link rel="stylesheet" href="./src/core/coreStyles.css">
+    <link rel="stylesheet" href="./src/core/blockStyles.css">
+    <link rel="stylesheet" href="./src/components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="./src/components/matrix/matrix.css">
+</head>
+
+<body data-color-scheme="light">
+    <!-- Loading Screen (Styles in coreStyles.css) -->
+    <div id="loading-screen" class="loading-overlay">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <span class="logo-icon">💠</span>
+                <h1>OPTIONS HUB</h1>
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+            <div class="loading-text">INITIALIZING MARKET DATA</div>
+            <div class="loading-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Fragment Anchors -->
+    <div id="header-container"></div>
+
+    <!-- Navigation Helpers (Managed by headerRenderer) -->
+    <div id="exchange-tabs-container" class="exchange-tabs-container"></div>
+    <div id="ru-tabs-container" class="exchange-tabs-container"></div>
+
+    <!-- Ticker Sidebar (Managed by sidebarRenderer) -->
+    <div id="ticker-sidebar-container"></div>
+
+    <main>
+        <!-- Crypto Market Section -->
+        <div class="tab-content active" id="crypto-content">
+            <div id="matrix-root"></div>
+        </div>
+
+        <!-- RU Market Section (Legacy structure for now) -->
+        <div class="tab-content" id="ru-content">
+            <div id="futures-content" class="ru-sub-content" style="display: block; padding: 20px;">
+                <h2 style="color: var(--text-primary); margin-bottom: 15px; font-size: 24px;">Фьючерсы</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div
+                        style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 20px;">
+                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">RTS-12.24</h3>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Индекс РТС
+                            декабрь 2024</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--neon-green); font-size: 18px; font-weight: 600;">125,480.5</span>
+                            <span style="color: var(--neon-green); font-size: 14px;">+1.25%</span>
+                        </div>
+                    </div>
+                    <div
+                        style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 20px;">
+                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">Si-12.24</h3>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Доллар США /
+                            Российский рубль</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--neon-red); font-size: 18px; font-weight: 600;">92.45</span>
+                            <span style="color: var(--neon-red); font-size: 14px;">-0.32%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="indices-content" class="ru-sub-content" style="display: none; padding: 20px;">
+                <h2 style="color: var(--text-primary); margin-bottom: 15px; font-size: 24px;">Индексы</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div
+                        style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 20px;">
+                        <h3 style="color: var(--text-primary); margin-bottom: 10px;">MOEX</h3>
+                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 15px;">Индекс МосБиржи
+                        </p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--neon-green); font-size: 18px; font-weight: 600;">3,425.7</span>
+                            <span style="color: var(--neon-green); font-size: 14px;">+0.87%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="stocks-content" class="ru-sub-content" style="display: none; padding: 8px;">
+                <div class="placeholder">
+                    <p>RU Stocks are under development</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- US Market Section -->
+        <div class="tab-content" id="us-content">
+            <div class="placeholder">
+                <p>US Market section is under development</p>
+            </div>
+        </div>
+
+        <!-- EU Market Section -->
+        <div class="tab-content" id="eu-content">
+            <div class="placeholder">
+                <p>EU Market section is under development</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- App Entry Point (Bundler-free Modules) -->
+    <script type="module" src="./src/main.js"></script>
+
+    <!-- Essential Runtime Support (Theme & Loading) -->
+    <script>
+        // Critical: Primary Theme Guard
+        (() => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', savedTheme);
+        })();
+
+        // Remove loading overlay when application core signals ready
+        window.addEventListener('data:ready', () => {
+            const overlay = document.getElementById('loading-screen');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.remove(), 500);
+            }
+        });
+    </script>
+</body>
+
+</html>

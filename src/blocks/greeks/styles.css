@@ -1,0 +1,68 @@
+.greeks-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    padding: 14px;
+}
+
+.greeks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.greek-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.greek-section__title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 8px;
+}
+
+.greek-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.greek-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.greek-item__label {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.greek-item__value {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Color Tokens for Greeks */
+.greek--delta {
+    color: #00bcd4;
+}
+
+.greek--gamma {
+    color: #4caf50;
+}
+
+.greek--vega {
+    color: #ff9800;
+}
+
+.greek--theta {
+    color: #f44336;
+}

@@ -1,0 +1,43 @@
+.metric-card {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background: var(--card-bg, #ffffff);
+    border-radius: 8px;
+    height: 100%;
+}
+
+.metric-card__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted, #666);
+    margin-bottom: 8px;
+}
+
+.metric-card__value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main, #111);
+}
+
+.metric-card__delta {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Color States */
+.metric-card--positive .metric-card__value,
+.metric-card--positive .metric-card__delta {
+    color: var(--neon-green, #4caf50);
+}
+
+.metric-card--negative .metric-card__value,
+.metric-card--negative .metric-card__delta {
+    color: var(--neon-red, #f44336);
+}
+
+.metric-card--neutral .metric-card__value {
+    color: var(--text-main, #111);
+}

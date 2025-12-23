@@ -1,0 +1,2 @@
+python bybit_data_collector.py
+python bybit_options_metrics.py

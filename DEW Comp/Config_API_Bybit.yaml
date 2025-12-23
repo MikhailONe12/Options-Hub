@@ -1,0 +1,57 @@
+collection:
+  debug: true
+  market_hours_only: true
+  timezone: UTC
+  # Market hours (24-hour format) - Bybit is open 24/7 but we can set trading hours
+  market_open_time: "00:00"
+  market_close_time: "23:59"
+  # Scheduling settings
+  # schedule_interval: 0 means run once
+  # schedule_interval: positive integer means run every N minutes
+  schedule_interval: 5
+  # Auto-stop at end of trading hours (requires schedule_interval > 0)
+  auto_stop_at_close: false
+#data_folder: ./bybit_data
+data_folder: E:\10.12.2025\Option_Hub\0_Data\Bybit_Data
+bybit_api:
+  base_url: https://api.bybit.com
+  endpoints:
+    instruments: /v5/market/instruments-info
+    tickers: /v5/market/tickers
+settings:
+  api_retries: 3
+  api_timeout: 60
+
+asset_types:
+  options:
+  - BTC
+  - ETH
+  - SOL
+  - XRP
+  - MNT
+  - DOGE
+
+tickers:
+  - BTC
+  - ETH
+  - SOL
+  - XRP
+  - MNT
+  - DOGE
+
+# Futures settings - specify which quote coins to collect data for
+futures:
+  quote_coins:
+  - USDT
+  # Add other quote coins here if needed, e.g.:
+  # - USDC
+  # - BTC
+
+trading_days:
+- Monday
+- Tuesday
+- Wednesday
+- Thursday
+- Friday
+- Saturday
+- Sunday

@@ -1,0 +1,177 @@
+/* === HEADER CORE === */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    /* Subtle pulse */
+    box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+}
+
+.status-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* === MAIN NAVIGATION TABS === */
+.tabs {
+    display: flex;
+    gap: 8px;
+    height: 100%;
+}
+
+.tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    height: 60px; /* Full header height */
+    display: flex;
+    align-items: center;
+}
+
+.tab:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.tab.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent-primary);
+    background: var(--bg-hover);
+}
+
+.tab.active::after {
+    display: none;
+}
+
+/* === HEADER TOOLS (RIGHT) === */
+.header-right {
+    display: flex;
+    gap: 16px;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-family: var(--font-mono);
+}
+
+.icon-btn:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+/* Theme Icon Toggling */
+body[data-theme="light"] .icon-light { display: none; }
+body[data-theme="light"] .icon-dark { display: inline !important; }
+body[data-theme="dark"] .icon-light { display: inline; }
+body[data-theme="dark"] .icon-dark { display: none; }
+
+/* === SUB-NAVIGATION TABS (Exchange, RU) === */
+.exchange-tabs-container {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px; /* Align with header */
+    margin: 0;
+    z-index: 999;
+    flex-direction: row;
+    gap: 24px;
+    height: 40px;
+    pointer-events: none;
+}
+
+.exchange-tabs-container.active {
+    display: flex;
+}
+
+.exchange-tab {
+    padding: 0 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    pointer-events: auto;
+}
+
+.exchange-tab:hover {
+    color: var(--text-primary);
+}
+
+.exchange-tab.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--neon-green);
+    border-bottom-color: var(--neon-green);
+    box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.1);
+}

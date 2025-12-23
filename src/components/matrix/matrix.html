@@ -1,0 +1,66 @@
+<div class="matrix-container" data-role="matrix-container">
+    <div class="matrix-left-sidebar" data-role="matrix-strikes-sidebar">
+        <!-- Strikes will be rendered here -->
+    </div>
+
+    <div class="matrix-main-section">
+        <div class="matrix-filter-section">
+            <div class="matrix-mode-selector">
+                <button class="mode-btn active" data-mode="cumulative">Cumulative</button>
+                <button class="mode-btn" data-mode="expiry">Per Expiry</button>
+            </div>
+            <div class="matrix-legend" data-role="matrix-legend">
+                <div class="legend-item">
+                    <span class="legend-dot gex"></span>
+                    <span>GEX</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot dex"></span>
+                    <span>DEX</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="matrix-grid-container">
+            <div class="matrix-grid-header" data-role="matrix-expiries-header">
+                <!-- Expiries will be rendered here -->
+            </div>
+            <div class="matrix-grid-columns-wrapper" data-role="matrix-grid">
+                <!-- Heatmap dots will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <aside class="matrix-stats-column" data-role="matrix-stats">
+        <div class="stats-header">
+            <h3>STATISTICS</h3>
+            <span class="ticker-badge" data-role="active-ticker">-</span>
+        </div>
+
+        <div class="stats-group">
+            <div class="stat-item">
+                <label>Max GEX Strike</label>
+                <span class="value" data-role="stat-max-gex-strike">-</span>
+            </div>
+            <div class="stat-item">
+                <label>Max DEX Strike</label>
+                <span class="value" data-role="stat-max-dex-strike">-</span>
+            </div>
+            <div class="stat-item highlight">
+                <label>Zero Gamma</label>
+                <span class="value" data-role="stat-zero-gamma">-</span>
+            </div>
+        </div>
+
+        <div class="stats-group">
+            <div class="stat-item">
+                <label>Total Call GEX</label>
+                <span class="value positive" data-role="stat-total-call-gex">-</span>
+            </div>
+            <div class="stat-item">
+                <label>Total Put GEX</label>
+                <span class="value negative" data-role="stat-total-put-gex">-</span>
+            </div>
+        </div>
+    </aside>
+</div>

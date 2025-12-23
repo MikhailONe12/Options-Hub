@@ -1,0 +1,19 @@
+# Конфигурационный файл для расчета опционных метрик Bybit
+
+# Периодичность расчета метрик (в минутах)
+calculation_interval: 5
+
+# Путь к папке с базами данных Bybit
+data_folder: E:\10.12.2025\Option_Hub\0_Data\Bybit_Data
+
+# Путь для сохранения баз данных с метриками
+metrics_folder: E:\10.12.2025\Option_Hub\0_Data\Bybit_metrics
+
+# Список тикеров для обработки
+tickers:
+  - BTC
+  - ETH
+  - SOL
+  - XRP
+  - MNT
+  - DOGE
